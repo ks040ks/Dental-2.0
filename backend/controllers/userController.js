@@ -118,7 +118,11 @@ export const getUserProfile = async(req,res) =>{
         const user = await User.findById(userId)
 
         if(!user){
-            return res.status(404).json({sucess:false, message:"User not found"})
+            return res.status(404)
+            .json({
+                sucess:false, 
+                message:"User not found"
+            })
         }
 
         const {password, ...rest} = user._doc
