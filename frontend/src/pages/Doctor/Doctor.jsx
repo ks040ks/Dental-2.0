@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import DoctorCard from '../../component/Doctor/DoctorCard.jsx'
-
+import Testimonial from "../../component/Testimonial/Testmonial.jsx"
 import useFetchData from "../../hooks/useFetchData.jsx"
 import { BASE_URL } from "../../config.js"
 import Loader from "../../component/Loader/Loading.jsx"
@@ -26,6 +26,7 @@ const Doctors = () => {
     return()=> clearTimeout(timeout);
 
   },[query])
+  
   const {data: doctors, loading, error} = useFetchData(`${BASE_URL}/doctor?query=${query}`);
 
   return (
@@ -41,7 +42,9 @@ const Doctors = () => {
         value={query}
         onChange={e=> setQuery(e.target.value)}
         placeholder="Search Your Doctor by name"/>
-        <button className=' bg-primaryColor py-[15px] px-[35px] rounded-[50px] text-white font-[600]  rounded-r-md' onClick={handleSearch}>
+
+        <button className=' bg-primaryColor py-[15px] px-[35px] rounded-[50px] text-white font-[600]  rounded-r-md' 
+        onClick={handleSearch}>
         Search</button>
       </div>
       </div>
@@ -52,14 +55,13 @@ const Doctors = () => {
 
         {loading && <Loader/>}
         {error && <Error/>}
-      { !loading && !error && <div className='grid grid-col-1 sm:grid-cols-2  lg:grid-cols-4
+      { !loading && !error && (<div className='grid grid-col-1 sm:grid-cols-2  lg:grid-cols-4
       gap-5 lg:gap-[30px] mt-[30px] lg-mt-[55px]'>
     {doctors.map(doctor => (
         <DoctorCard key={doctor._id} doctor={doctor} />
    ))}
-
-      {/* <DoctorCard/> */}
-    </div>}
+   
+    </div>)}
       </div>
     </section>
 
@@ -74,7 +76,7 @@ const Doctors = () => {
           </p>
         </div>
 
-      {/*=======TESTIMONIAL======*/}
+     <Testimonial/>
 
 
       </div>
