@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import avatar from "../../assets/images/p.png"
+import { formatDate } from '../../utils/formateDate'
 import {AiFillStar} from "react-icons/ai"
 import FeedbackForm from './FeedbackForm'
-const Feedback = () => {
+const Feedback = ({reviews, totalRating}) => {
 
   const[showFeedbackForm, setShowFeedbackShow] = useState(false)
 
@@ -12,33 +12,35 @@ const Feedback = () => {
     <div>
       <div className='mb-[50px]'>
         <h4 className='text-[20px] leading-[30px] font-bold text-headingColor mb:[30px]'>
-          All reviews
+          All reviews ({totalRating})
         </h4>
 
-      <div className='flex justify-between gap-10 mb-[30px]'>
-        <div className='flex gap-3'>
+      {reviews?.map((review , index)=> 
+        (<div className='flex justify-between gap-10 mb-[30px]'>
+        <div key={index} className='flex gap-3'>
         <figure className='w-10 h-10 rounded-full'>
-          <img className =" w-full"src={avatar}/> {/*=====PHOTOOOO*/}
+          <img className =" w-full"src={review?.user?.photo}/> {/*=====PHOTOOOO*/}
         </figure>
 
         <div>
           <h5 className='text-[16px] leading-6 text-primaryColor font-bold'>
-            Ali ahemd
+            {review?.user?.name}
           </h5>
           <p className='text-[14px] leading-6 text-textColor'>
-            4 June, 2024
+          {formatDate(review?.createdAt)}
           </p>
           <p className='mt-3 font-medium leading-[30px]  text-textColor '>
-            Good Service, highly recommendation. 👍
+            {review.reviewText}
           </p>
         </div>
       </div>
 
       <div className='flex gap-1'>
-        {[...Array(5).keys()].map((_,  index) =>
+        {[...Array(review?.rating).keys()].map((_,  index) =>
            <AiFillStar key={index} color='#0067FF'/>)}
       </div>
-      </div>
+      </div>)
+    )}
       </div>
 
      {!showFeedbackForm && <div className='text-center'>
