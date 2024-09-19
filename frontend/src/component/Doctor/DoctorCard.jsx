@@ -5,7 +5,7 @@ import {BsArrowRight} from "react-icons/bs";
 
 const DoctorCard = ({doctor}) => {
 
-  const {name, avgRating,Role, totalRating, photo , experiences} = doctor
+  const {name, avgRating,specialization, totalRating, photo , experiences} = doctor
 
   return (
     <div className='p-3 lg:p-5 '>
@@ -19,7 +19,7 @@ const DoctorCard = ({doctor}) => {
     <div className='mt-2 lg:mt-4 flex items-center justify-between'>
       <span className='bg-[#CCF0F3] text-irisBlueColor py-1 px-2 lg:py-2 lg:px-2 text-[12px]
       leading-4 lg:text-[16px] lg:leading-7 font-semibold rounded'>
-     {Role}
+     {specialization}
       </span>
 
     <div className='flex items-center gap-[6px]'>
@@ -29,7 +29,7 @@ const DoctorCard = ({doctor}) => {
         {avgRating}
       </span>
       <span className='text-[14px] leading-6 lg:text-[16px] lg:heading-7 font-[400] text-headingColor'>
-       {totalRating}
+       ({totalRating})
       </span>
     </div>
       </div>
@@ -38,13 +38,13 @@ const DoctorCard = ({doctor}) => {
       <div>
         <h3 className='text-[16px] leading-7 lg:text-[18px] lg:leading-[30px] font-semibold
         text-headingColor'>+ Patient Treated</h3>
-{/* 
+
         <p className='text-[14px] leading-6 font-[400] text-textColor'>
-          At {experiences && experiences[0]?.hospital}</p> */}
+          At {experiences && experiences[0]?.hospital}</p>
     </div>
 
     <Link
-     
+     to={`/doctor/${doctor._id}`}
     className='w-[44px] h-[44px] rounded-full border border-solid
               border-[#181A1E] mt-[30px  flex items-center justify-center group hover:bg-primaryColor
               hover:border-none'>
