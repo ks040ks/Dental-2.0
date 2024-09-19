@@ -5,7 +5,7 @@ import {AiOutlineDelete} from "react-icons/ai"
 import uploadImageToCloudinary from "./../../utils/cloudinary";
 import { BASE_URL,token } from "./../../config";
 import {toast} from "react-toastify"
-import useGetProfile from "../../hooks/useFetchData"
+
 
 
 const DocProfile = ({doctorData}) => {
@@ -28,22 +28,22 @@ const DocProfile = ({doctorData}) => {
     })
 
 
-    // useEffect(() => {
-    //     setFormData({
-    //         name:doctorData?.name,
-    //         email:doctorData?.email,
-    //         bio:doctorData?.bio,
-    //         phone:doctorData?.phone,
-    //         gender:doctorData?.gender,
-    //         specialization:doctorData?.specialization,
-    //         feePrice:31,
-    //         qualification:doctorData?.qualification,
-    //         experiences:doctorData?.experiences,
-    //         timeSlots:doctorData?.timeSlots,
-    //         about:doctorData?.about,
-    //         photo:doctorData?.photo
-    //     })
-    // },[doctorData])
+    useEffect(() => {
+        setFormData({
+            name:doctorData?.name,
+            email:doctorData?.email,
+            bio:doctorData?.bio,
+            phone:doctorData?.phone,
+            gender:doctorData?.gender,
+            specialization:doctorData?.specialization,
+            feePrice:31,
+            qualification:doctorData?.qualification,
+            experiences:doctorData?.experiences,
+            timeSlots:doctorData?.timeSlots,
+            about:doctorData?.about,
+            photo:doctorData?.photo
+        })
+    },[doctorData])
 
     const handleInputChange = e=>{
         setFormData({...formData,[e.target.name]:e.target.value})
@@ -59,8 +59,7 @@ const DocProfile = ({doctorData}) => {
 
     const updateProfileHandler = async (e) =>{
                e.preventDefault();
-                console.log(doctorData);
-console.log(doctorData ? doctorData._id : 'No doctor data');
+
 
                if (!doctorData) {
                 toast.error("Doctor data is not loaded yet");
@@ -97,7 +96,7 @@ console.log(doctorData ? doctorData._id : 'No doctor data');
 
         setFormData(prevformData => (
             {...prevformData,
-            [key]:[...prevformData[key], item]
+            [key]:[...(prevformData[key] || []), item]
         }))
     };
 
