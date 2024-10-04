@@ -15,8 +15,6 @@ const MyAccount = () => {
     const [tab, setTab] = useState("bookings")
 
     const{data: userData, loading, error} = useGetProfile(`${BASE_URL}/users/profile/me`)
-    console.log("Here is the user data:",userData)
-   
 
     const handleLogout = () => {
         dispatch({type:'LOGOUT'})
@@ -52,6 +50,7 @@ const MyAccount = () => {
             <p className='text-textColor text-[15px] leading-6 font-medium'>
                 {userData.gender}
             </p>
+            
 
             </div>
 
